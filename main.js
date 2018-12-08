@@ -28,14 +28,14 @@ let downArrowButton = $("#down-arrow");
 let leftArrowButton = $("#left-arrow");
 let userSelect = $("#user-interaction");
 let itemArr =                 
-    ["nothing.", 
-    "an empty Guinness can.",
-    "some Irish Stew." ,
-    "an empty Jameson bottle.",
-    "a U2 Album.",
-    "a full Guinness can.",
-    "a full Jameson bottle.",
-    "a Shamrock." ];
+    ["nothing", 
+    "an empty Guinness can",
+    "some Irish Stew" ,
+    "an empty Jameson bottle",
+    "a U2 Album",
+    "a full Guinness can",
+    "a full Jameson bottle",
+    "a Shamrock" ];
 let gameSpaceDimension = 7;
 
 let charObject = {
@@ -259,12 +259,9 @@ let gamePlay = {
                     //pushes items found into array
                     charObject.inventoryArr.push(charObject.itemFound);
                     console.log(charObject.inventoryArr);
-
-                    for(var i = array.length - 1; i >= 0; i--) {
-                        if(array[i] === "nothing") {
-                           array.splice(i, 1);
-                        }
-                    }
+                    charObject.inventoryArr = charObject.inventoryArr.filter(a => a !== 'nothing');
+                    console.log(charObject.inventoryArr);
+                    
                     //console.log(gridDiv[i][j]);
                     gridDiv[j][i].css("background-color", "#333");
                     gridDiv[j][i].css("transition-property", "background-color");

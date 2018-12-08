@@ -47,7 +47,17 @@ input {
     margin-bottom:6px;
 }
 
-.stats-div {
-    float:right;
+.stats-inventory {
+    float:right !important;
     margin-right: 24px;
+    width: 300px;
+}
+.inventory {
+    margin-top: 12px;
+    background-color:#aaa;
+    min-height: 300px;
+}
+.inventory-item {
+    width: 36px;
+    margin-right: 16px;
 }
