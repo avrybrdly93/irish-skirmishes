@@ -52,7 +52,7 @@ input {
     margin-right: 24px;
     width: 300px;
 }
-.inventory {
+.inventory-div {
     margin-top: 12px;
     background-color:#aaa;
     min-height: 300px;

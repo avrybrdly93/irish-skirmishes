@@ -79,6 +79,7 @@ let charObject = {
             charObject.currentLocationY = 0;
         }
         gamePlay.itemPickup();
+        gamePlay.displayInInventory
         userSelect.text("You walk one step north and find " + charObject.itemFound + "." + "(" + charObject.currentLocationX + ", " + charObject.currentLocationY + ")");
         charObject.stats.energy--;
         $("#energy-bar").css("width", "50%");
@@ -129,8 +130,16 @@ let charObject = {
         charObject.addTrail();
         gamePlay.checkTrail();
         //console.log(charObject.trailX, charObject.trailY);
+    },
+    addToInventory: function(imageSrc) {
+        let inventory = $("#inventory");
+        let itemImage = $("<img>");
+        inventory.append(itemImage);
+        itemImage.attr("src", imageSrc);
+        itemImage.attr("class", "inventory-item");
     }
 }
+
 let gamePlay = {
     gameSpace: new Array(gameSpaceDimension),
     itemSelect: new Array(gameSpaceDimension),
@@ -256,13 +265,13 @@ let gamePlay = {
                         this.itemSelect[i][j] = itemArr[7];
                         charObject.itemFound = this.itemSelect[i][j]; 
                     }
-                    //pushes items found into array
+                    // pushes items to inventoryArr
                     charObject.inventoryArr.push(charObject.itemFound);
                     console.log(charObject.inventoryArr);
                     charObject.inventoryArr = charObject.inventoryArr.filter(a => a !== 'nothing');
                     console.log(charObject.inventoryArr);
-                    
-                    //console.log(gridDiv[i][j]);
+
+                    //Changes user position on grid. For development purposes only.
                     gridDiv[j][i].css("background-color", "#333");
                     gridDiv[j][i].css("transition-property", "background-color");
                     gridDiv[j][i].css("transition-duration", "0.5s");
@@ -275,6 +284,27 @@ let gamePlay = {
                     gridDiv[j][i].css("transition-timing-function", "ease");
                 }
             }
+        }
+    },
+
+    // ["nothing", 
+    // "an empty Guinness can",
+    // "some Irish Stew" ,
+    // "an empty Jameson bottle",
+    // "a U2 Album",
+    // "a full Guinness can",
+    // "a full Jameson bottle",
+    // "a Shamrock" ];
+
+
+    displayInInventory() {
+        switch(itemFound) {
+            case itemArr[1]:
+                charObject.addToInventory("images/empty-beer.svg");
+                console.log("added empty beer");
+            case itemArr[5]:
+                charObject.addToInventory("images/full-beer.svg");
+                console.log("added full beer");
         }
     },
     removeArrows: function() {
@@ -322,7 +352,7 @@ let gamePlay = {
                 userSelect.text("You don't find anything, it seems you have recently been here before.");
             }
         }
-    }
+    },
 }
 
 document.onkeyup = function(e) {
