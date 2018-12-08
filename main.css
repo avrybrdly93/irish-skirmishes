@@ -60,4 +60,5 @@ input {
 .inventory-item {
     width: 36px;
     margin-right: 16px;
+    margin-bottom: 16px;
 }

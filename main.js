@@ -79,13 +79,13 @@ let charObject = {
             charObject.currentLocationY = 0;
         }
         gamePlay.itemPickup();
-        gamePlay.displayInInventory
         userSelect.text("You walk one step north and find " + charObject.itemFound + "." + "(" + charObject.currentLocationX + ", " + charObject.currentLocationY + ")");
         charObject.stats.energy--;
         $("#energy-bar").css("width", "50%");
         gamePlay.removeArrows();
         charObject.addTrail();
         gamePlay.checkTrail();
+        gamePlay.displayInInventory();
         //console.log(charObject.trailX, charObject.trailY);
     },
     moveRight: function() {
@@ -101,6 +101,7 @@ let charObject = {
         gamePlay.removeArrows();
         charObject.addTrail();
         gamePlay.checkTrail();
+        gamePlay.displayInInventory();
         //console.log(charObject.trailX, charObject.trailY);
     },
     moveDown: function() {
@@ -115,6 +116,7 @@ let charObject = {
         gamePlay.removeArrows();
         charObject.addTrail();
         gamePlay.checkTrail();
+        gamePlay.displayInInventory();
         //console.log(charObject.trailX, charObject.trailY);
     },
     moveLeft: function() {
@@ -129,6 +131,7 @@ let charObject = {
         gamePlay.removeArrows();
         charObject.addTrail();
         gamePlay.checkTrail();
+        gamePlay.displayInInventory();
         //console.log(charObject.trailX, charObject.trailY);
     },
     addToInventory: function(imageSrc) {
@@ -295,16 +298,36 @@ let gamePlay = {
     // "a full Guinness can",
     // "a full Jameson bottle",
     // "a Shamrock" ];
-
-
     displayInInventory() {
-        switch(itemFound) {
+        switch(charObject.itemFound) {
             case itemArr[1]:
                 charObject.addToInventory("images/empty-beer.svg");
                 console.log("added empty beer");
+                break;
+            case itemArr[2]:
+                charObject.addToInventory("images/irish-stew.svg");
+                console.log("added empty beer");
+                break;
+            case itemArr[3]:
+                charObject.addToInventory("images/empty-whiskey.svg");
+                console.log("added empty beer");
+                break;
+            case itemArr[4]:
+                charObject.addToInventory("images/U2-album.svg");
+                console.log("added empty beer");
+                break;
             case itemArr[5]:
                 charObject.addToInventory("images/full-beer.svg");
                 console.log("added full beer");
+                break;
+            case itemArr[6]:
+                charObject.addToInventory("images/full-whiskey.svg");
+                console.log("added empty beer");
+                break;
+            case itemArr[7]:
+                charObject.addToInventory("images/shamrock.svg");
+                console.log("added empty beer");
+                break;
         }
     },
     removeArrows: function() {
