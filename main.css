@@ -15,30 +15,28 @@ input {
 #main-char {
     width: 200px;
     position:absolute;
-    top: 160px;
-    left: 550px;
+    top: 60px;
+    left: 75px;
 }
 
 #up-arrow{
     position:absolute;
-    top: 100px;
-    left: 627px;
+    left: 152px;
 }
 
 #right-arrow{
     position:absolute;
-    top: 300px; /*330, 280*/
-    left: 780px;
+    top: 200px; /*330, 280*/
+    left: 305px;
 }
 #down-arrow{
     position:absolute;
-    top: 470px;
-    left: 627px;
+    top: 370px;
+    left: 152px;
 }
 #left-arrow{
     position:absolute;
-    top: 300px;
-    left: 475px;
+    top: 200px;
 }
 
 .progress {
@@ -48,14 +46,14 @@ input {
 }
 
 .stats-inventory {
-    float:right !important;
+    float:right;
     margin-right: 24px;
     width: 300px;
 }
 .inventory-div {
     margin-top: 12px;
     background-color:#aaa;
-    min-height: 300px;
+    height: 300px;
 }
 .inventory-item {
     width: 36px;
@@ -67,3 +65,71 @@ input {
     bottom: 18px;
     right: 18px;
 }
+.grid-container{
+    position:relative;
+    left:450px;
+    width: 350px;
+}
+.character-div{
+    /* position:relative;
+    right:300px;
+    bottom: 75px;
+    z-index: 1; */
+    position:relative;
+    left:150px;
+    top: 25px;
+    z-index: 1;
+}
+@media only screen and (max-width: 900px) {
+    body {
+      background-image:  url("images/ShamrockBackground-Rotated.png");
+      /* background-repeat: no-repeat; */
+    }
+    .character-div{
+        position:relative;
+        left:12px;
+        top: 0px;
+        width: 80%;
+    }
+    #main-char{
+        width: 150px;
+    }
+    #up-arrow{
+        position:absolute;
+        left: 127px;
+    }
+    
+    #right-arrow{
+        position:absolute;
+        top: 160px; /*330, 280*/
+        left: 255px;
+    }
+    #down-arrow{
+        position:absolute;
+        top: 300px;
+        left: 127px;
+    }
+    #left-arrow{
+        position:absolute;
+        top: 160px;
+    }
+    .grid-container{
+        display:none;
+    }
+    .stats-inventory{
+        width: 80%;
+        padding: 12px;
+        margin-right:0px;
+        float:none;
+    }
+    .stats-div{
+        width:100%;
+    }
+    .progress{
+        width:100%;
+        height: 20px;
+    }
+    .inventory-div{
+        height:200px;
+    }
+  }

@@ -175,6 +175,7 @@ let gamePlay = {
         gridDivRow = []
         gridDiv = []
         gridContainer = $("<div>");
+        gridContainer.attr("class", "grid-container");
         gridContainer.appendTo("body");
         for(let i = 0; i < gameSpaceDimension; i++) {
             gridDivRow[i] = $("<div>");
@@ -183,8 +184,8 @@ let gamePlay = {
             for(let j = 0; j < gameSpaceDimension; j++) {
                 gridDiv[i][j] = $("<img>");
                 gridDiv[i][j].appendTo(gridDivRow[i]);
-                gridDiv[i][j].css("width", "50px");
-                gridDiv[i][j].css("height", "50px");
+                gridDiv[i][j].css("width", "20px");
+                gridDiv[i][j].css("height", "20px");
                 gridDiv[i][j].css("background-color", "#ccc");
                 gridDiv[i][j].css("margin", "6");
                 gridDiv[i][j].attr("x-value", j)
