@@ -62,3 +62,8 @@ input {
     margin-right: 16px;
     margin-bottom: 16px;
 }
+.inventory-item-count {
+    position: relative;
+    bottom: 18px;
+    right: 18px;
+}

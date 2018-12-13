@@ -53,6 +53,7 @@ let charObject = {
     trailY: [],
     itemFound: null,
     inventoryArr: [],
+    itemCountDivArr: [],
 
     inventory: {
         emptyGuinness: 0,
@@ -134,12 +135,20 @@ let charObject = {
         gamePlay.displayInInventory();
         //console.log(charObject.trailX, charObject.trailY);
     },
+    createInventory: function() {
+        for(let i = 0; i < (itemArr.length - 1); i++) {
+            this.itemCountDivArr.push($("<span>"));
+            this.itemCountDivArr[i].attr("class", "inventory-item-count");
+        }
+    },
     addToInventory: function(imageSrc) {
-        let inventory = $("#inventory");
+        let inventoryDiv = $("#inventory");
         let itemImage = $("<img>");
-        inventory.append(itemImage);
+        inventoryDiv.append(itemImage);
+        inventoryDiv.append(this.itemCountDivArr[invDivIndex]);
         itemImage.attr("src", imageSrc);
         itemImage.attr("class", "inventory-item");
+        $("<br>");
     }
 }
 
@@ -227,30 +236,30 @@ let gamePlay = {
         for(let i = 0; i < gameSpaceDimension; i++) {
             for(let j = 0; j < gameSpaceDimension; j++) {
                 if(charObject.currentLocationX === i && charObject.currentLocationY === j) {
-                    console.log(i, j);
-                    console.log("rand value before" + this.gameSpace[i][j]);
-                    console.log("item before " + this.itemSelect[i][j]);
+                    //console.log(i, j);
+                    //console.log("rand value before" + this.gameSpace[i][j]);
+                    //console.log("item before " + this.itemSelect[i][j]);
                     this.gameSpace[i][j] = Math.floor(Math.random()*1000);
-                    console.log("rand value after" + this.gameSpace[i][j]);
+                    //console.log("rand value after" + this.gameSpace[i][j]);
                     if(this.gameSpace[i][j] < 500) {   
                         charObject.itemFound = this.itemSelect[i][j];
                         this.itemSelect[i][j] = itemArr[0];
-                        console.log("item after " + this.itemSelect[i][j]);       
+                        //console.log("item after " + this.itemSelect[i][j]);       
                     }
                     else if(this.gameSpace[i][j] < 700) {
                         charObject.itemFound = this.itemSelect[i][j];
                         this.itemSelect[i][j] = itemArr[1]; 
-                        console.log("item after " + this.itemSelect[i][j]);                    
+                        //console.log("item after " + this.itemSelect[i][j]);                    
                     }
                     else if(this.gameSpace[i][j] < 850) {
                         charObject.itemFound = this.itemSelect[i][j];
                         this.itemSelect[i][j] = itemArr[2]; 
-                        console.log("item after " + this.itemSelect[i][j]);                     
+                        //console.log("item after " + this.itemSelect[i][j]);                     
                     }
                     else if(this.gameSpace[i][j] < 900) {
                         this.itemSelect[i][j] = itemArr[3]; 
                         charObject.itemFound = this.itemSelect[i][j]; 
-                        console.log("item after " + this.itemSelect[i][j]);             
+                        //console.log("item after " + this.itemSelect[i][j]);             
                     }    
                     else if(this.gameSpace[i][j] < 940) {
                         this.itemSelect[i][j] = itemArr[4];  
@@ -270,9 +279,9 @@ let gamePlay = {
                     }
                     // pushes items to inventoryArr
                     charObject.inventoryArr.push(charObject.itemFound);
-                    console.log(charObject.inventoryArr);
+                    //console.log(charObject.inventoryArr);
                     charObject.inventoryArr = charObject.inventoryArr.filter(a => a !== 'nothing');
-                    console.log(charObject.inventoryArr);
+                    //console.log(charObject.inventoryArr);
 
                     //Changes user position on grid. For development purposes only.
                     gridDiv[j][i].css("background-color", "#333");
@@ -301,32 +310,81 @@ let gamePlay = {
     displayInInventory() {
         switch(charObject.itemFound) {
             case itemArr[1]:
-                charObject.addToInventory("images/empty-beer.svg");
-                console.log("added empty beer");
+                charObject.inventory.emptyGuinness++;
+                if(charObject.inventory.emptyGuinness < 2) {
+                    invDivIndex = 0;
+                    charObject.addToInventory("images/empty-beer.svg");
+                }
+                else {
+                    charObject.itemCountDivArr[0].text(charObject.inventory.emptyGuinness);
+                    console.log(charObject.itemCountDivArr[0].text());
+                }
                 break;
             case itemArr[2]:
-                charObject.addToInventory("images/irish-stew.svg");
-                console.log("added empty beer");
+                charObject.inventory.irishStew++;
+                if(charObject.inventory.irishStew < 2) {
+                    invDivIndex = 1;
+                    charObject.addToInventory("images/irish-stew.svg");
+                }
+                else {
+                    charObject.itemCountDivArr[1].text(charObject.inventory.irishStew);
+                    console.log(charObject.itemCountDivArr[1].text());
+                }
                 break;
             case itemArr[3]:
-                charObject.addToInventory("images/empty-whiskey.svg");
-                console.log("added empty beer");
+            charObject.inventory.emptyJameson++;
+                if(charObject.inventory.emptyJameson< 2) {
+                    invDivIndex = 2;
+                    charObject.addToInventory("images/empty-whiskey.svg");
+                }
+                else {
+                    charObject.itemCountDivArr[2].text(charObject.inventory.emptyJameson);
+                    console.log(charObject.itemCountDivArr[2].text());
+                }
                 break;
             case itemArr[4]:
-                charObject.addToInventory("images/U2-album.svg");
-                console.log("added empty beer");
+                charObject.inventory.u2Album++;
+                if(charObject.inventory.u2Album < 2) {
+                    invDivIndex = 3;
+                    charObject.addToInventory("images/U2-album.svg");
+                }
+                else {
+                    charObject.itemCountDivArr[3].text(charObject.inventory.u2Album);
+                    console.log(charObject.itemCountDivArr[3].text());
+                }
                 break;
             case itemArr[5]:
-                charObject.addToInventory("images/full-beer.svg");
-                console.log("added full beer");
+                charObject.inventory.fullGuinness++;
+                if(charObject.inventory.fullGuinness < 2) {
+                    invDivIndex = 4;
+                    charObject.addToInventory("images/full-beer.svg");
+                }
+                else {
+                    charObject.itemCountDivArr[4].text(charObject.inventory.fullGuinness);
+                    console.log(charObject.itemCountDivArr[4].text());
+                }
                 break;
             case itemArr[6]:
-                charObject.addToInventory("images/full-whiskey.svg");
-                console.log("added empty beer");
+                charObject.inventory.fullJameson++;
+                if(charObject.inventory.fullJameson < 2) {
+                    invDivIndex = 5;
+                    charObject.addToInventory("images/full-whiskey.svg");
+                }
+                else {
+                    charObject.itemCountDivArr[5].text(charObject.inventory.fullJameson);
+                    console.log(charObject.itemCountDivArr[5].text());
+                }
                 break;
             case itemArr[7]:
-                charObject.addToInventory("images/shamrock.svg");
-                console.log("added empty beer");
+                charObject.inventory.shamrock++;
+                if(charObject.inventory.shamrock < 2) {
+                    invDivIndex = 6;
+                    charObject.addToInventory("images/shamrock.svg");
+                }
+                else {
+                    charObject.itemCountDivArr[6].text(charObject.inventory.shamrock);
+                    console.log(charObject.itemCountDivArr[6].text());
+                }
                 break;
         }
     },
@@ -403,7 +461,7 @@ gamePlay.createGameSpace();
 gamePlay.assignGameSpaceRand();
 gamePlay.assignItems();
 gamePlay.assignGrid();
-
+charObject.createInventory();
 
 //console.log(gamePlay.gameSpace[1][1]);
 });
